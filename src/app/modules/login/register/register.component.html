@@ -1,0 +1,20 @@
+<mat-card>
+<mat-dialog-content>
+  <h2 mat-dialog-title>Confirmar registro</h2>
+  <p>¿Desea registrar el correo <br>
+    <b>{{data?.email}} </b>?</p>
+</mat-dialog-content>
+<mat-dialog-actions>
+</mat-dialog-actions>
+
+    <mat-card-footer>
+      <mat-card-actions>
+        <div class="register-button">
+          <button mat-button mat-dialog-close color="secondary">Cancelar</button>
+          <button mat-button (click)="createUser()" color="primary">Aceptar</button>
+        </div>
+      </mat-card-actions>
+      <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+    </mat-card-footer>
+
+    </mat-card>
