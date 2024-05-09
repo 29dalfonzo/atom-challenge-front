@@ -1,46 +1,6 @@
 <mat-card class="tasks-card">
-  <mat-card-title> Agregar Tarea </mat-card-title>
-  <mat-card-content>
-    <form [formGroup]="form" (ngSubmit)="submit()">
-      <div class="container">
-        <div class="title">
-          <mat-form-field>
-            <input matInput placeholder="Título" formControlName="title" />
-            <mat-error *ngIf="form.get('title')?.hasError('required')">
-              Debe ingresar un título
-            </mat-error>
-          </mat-form-field>
-        </div>
-        <div class="done">
-          <mat-checkbox formControlName="done">Completado</mat-checkbox>
-        </div>
-        <div class="description">
-          <mat-form-field>
-            <textarea
-              matInput
-              placeholder="Descripción"
-              formControlName="description"
-            ></textarea>
-            <mat-error *ngIf="form.get('description')?.hasError('required')">
-              Debe ingresar una descripción
-            </mat-error>
-          </mat-form-field>
-        </div>
-        <div class="tasks-button">
-          <mat-card-actions>
-            <button
-              mat-raised-button
-              color="primary"
-              [disabled]="!form.valid"
-              type="submit"
-            >
-              Agregar tarea
-            </button>
-        </mat-card-actions>
-      </div>
-      </div>
-    </form>
-  </mat-card-content>
+  <mat-card-title > Agregar Tarea </mat-card-title>
+      <app-task-form [task]="task" (submitEvent)="handleForm($event)"></app-task-form>
   <mat-card-footer>
     <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
   </mat-card-footer>
