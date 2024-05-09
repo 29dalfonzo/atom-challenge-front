@@ -1,1 +1,20 @@
-<p>login works!</p>
+<div class="login-form">
+  <mat-card>
+    <mat-card-title>
+      Login
+    </mat-card-title>
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="submit()">
+        <mat-form-field>
+          <input matInput placeholder="Email" formControlName="email">
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+    <mat-card-footer>
+      <mat-card-actions>
+        <div class="login-button">
+          <button mat-raised-button color="primary" (click)="submit()">Ingresar</button>
+        </div>
+      </mat-card-actions>
+    </mat-card-footer> </mat-card>
+</div>
