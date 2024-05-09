@@ -52,7 +52,13 @@
     <mat-list class="tasks-container" *ngFor="let task of tasks">
       <span matListItemTitle class="task-title">{{ task.title }}</span>
       <div class="task-options">
-        options
+        <button mat-icon-button (click)="editTask(task)">
+          <mat-icon >edit</mat-icon>
+        </button>
+        <button mat-icon-button (click)="deleteTask(task)">
+          <mat-icon >delete</mat-icon>
+        </button>
+
       </div>
       <span matListItemLine class="task-description" [matTooltip]="task.description" matTooltipPosition="left">{{ task.description.length > 50 ? task.description.substring(0, 40) + '...' : task.description }}</span>
       <div class="task-completed">
