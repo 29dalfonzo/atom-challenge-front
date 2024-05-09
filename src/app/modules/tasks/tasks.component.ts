@@ -12,6 +12,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatListModule } from '@angular/material/list';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-tasks',
@@ -19,7 +20,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
   styleUrls: ['./tasks.component.scss'],
   imports: [CommonModule, MatButtonModule, MatCardModule,
     MatFormFieldModule, MatInputModule,
-    MatProgressBarModule, MatDividerModule, MatListModule, ReactiveFormsModule, MatCheckboxModule],
+    MatProgressBarModule, MatDividerModule, MatListModule, ReactiveFormsModule, MatCheckboxModule, MatTooltipModule],
   standalone: true,
 })
 export class TasksComponent {

@@ -54,7 +54,7 @@
       <div class="task-options">
         options
       </div>
-      <span matListItemLine class="task-description">{{ task.description }}</span>
+      <span matListItemLine class="task-description" [matTooltip]="task.description" matTooltipPosition="left">{{ task.description.length > 50 ? task.description.substring(0, 40) + '...' : task.description }}</span>
       <div class="task-completed">
         <mat-checkbox [checked]="task.done" (change)="changeTask(task)" >{{task.done? 'Completado': 'Pendiente'}}</mat-checkbox>
     </div>
