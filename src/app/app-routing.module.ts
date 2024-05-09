@@ -17,6 +17,11 @@ const routes: Routes = [
     path: "login",
     loadComponent: () => import("./modules/login/login.component").then((m) => m.LoginComponent),
   },
+  {
+    path: "tasks",
+    loadComponent: () => import("./modules/tasks/tasks.component").then((m) => m.TasksComponent),
+
+  }
 ];
 
 @NgModule({

@@ -7,14 +7,19 @@
       <form [formGroup]="form" (ngSubmit)="submit()">
         <mat-form-field>
           <input matInput placeholder="Email" formControlName="email">
+          <mat-error *ngIf="form.get('email')?.hasError('email')">
+            Debe ingresar un email válido
+          </mat-error>
         </mat-form-field>
       </form>
     </mat-card-content>
     <mat-card-footer>
       <mat-card-actions>
         <div class="login-button">
-          <button mat-raised-button color="primary" (click)="submit()">Ingresar</button>
+          <button mat-raised-button color="primary" [disabled]="!form.valid" (click)="submit()">Ingresar</button>
         </div>
       </mat-card-actions>
-    </mat-card-footer> </mat-card>
+      <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+    </mat-card-footer>
+  </mat-card>
 </div>
