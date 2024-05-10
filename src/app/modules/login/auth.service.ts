@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'enviroment';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,17 +15,13 @@ export class AuthService {
     return this.http.get(`${this.apiUrl}/${email}`, { headers: this.headers });
   }
 
-  register(email: string) : Observable<string> {
+  register(email: string) : Observable<any> {
     return this.http.post(
       `${this.apiUrl}`,
       { email },
       {
         headers: this.headers,
-        responseType: 'text'
       }
-    )
-      .pipe(
-        map((response) => response as string)
-      );
+    );
   }
 }
