@@ -18,13 +18,14 @@ import { Task } from 'src/app/interfaces/task.interface';
 
 import { AuthService } from '../login/auth.service';
 import { TaskFormComponent } from "./task-form/task-form.component";
+import { TaskService } from './Tasks.service';
 
 @Component({
   selector: 'app-tasks',
   templateUrl: './tasks.component.html',
   styleUrls: ['./tasks.component.scss'],
   standalone: true,
-  providers: [AuthService],
+  providers: [AuthService, TaskService],
   imports: [CommonModule, MatButtonModule, MatCardModule,
     MatFormFieldModule, MatInputModule,
     MatProgressBarModule, MatDividerModule, MatListModule, ReactiveFormsModule, MatCheckboxModule,
@@ -34,40 +35,27 @@ export class TasksComponent implements OnInit {
   task: Task | null = null;
 
   loading = false;
-  tasks:Task[] = [
-    {
-      id: 1,
-      title: 'Task 1',
-      description: 'Description 1',
-      date: new Date(),
-      done: false
-    },
-    {
-      id: 2,
-      title: 'Task 2',
-      description: 'Description 2',
-      date: new Date(),
-      done: false
-    },
-    {
-      id: 3,
-      title: 'Task 3',
-      description: 'Description 3',
-      date: new Date(),
-      done: false
-    },
-  ];
+  tasks:Task[] = [];
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    public tasksService: TaskService
+  ) { }
 
   ngOnInit(): void {
     this.validateLogin();
+    // this.getTasks();
   }
 
   validateLogin(): void {
     if (!this.authService.validateLogin()) {
       this.router.navigate(['/login']);
     }
+  }
+
+  getTasks(): void {
+    this.loading = true;
   }
 
   changeTask(task: Task):void {
@@ -93,6 +81,6 @@ export class TasksComponent implements OnInit {
   }
 
   deleteTask(task: Task): void {
-    this.tasks = this.tasks.filter((t) => t.id !== task.id);
+    this.tasksService.deleteTask(task);
   }
 }

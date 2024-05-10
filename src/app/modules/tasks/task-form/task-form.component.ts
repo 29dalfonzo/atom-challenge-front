@@ -17,9 +17,12 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { Task } from 'src/app/interfaces/task.interface';
 
+import { TaskService } from '../Tasks.service';
+
 @Component({
   selector: 'app-task-form',
   standalone: true,
+  providers: [TaskService],
   imports: [CommonModule, MatButtonModule, MatCardModule, MatFormFieldModule,
     MatInputModule, MatProgressBarModule, MatDividerModule,
     MatListModule, ReactiveFormsModule, MatCheckboxModule, MatTooltipModule, MatIconModule],
@@ -34,7 +37,10 @@ export class TaskFormComponent implements OnChanges {
     title: new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.required]),
     done: new FormControl(false),
+    date: new FormControl(new Date())
   });
+
+  constructor(private tasksService: TaskService) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['task'].currentValue && this.task) {
@@ -44,7 +50,11 @@ export class TaskFormComponent implements OnChanges {
 
   submit(): void {
     if (this.form.valid) {
-      this.submitEvent.emit(this.form.value);
+      if (this.task) {
+        this.tasksService.updateTask(this.form.value);
+      } else {
+        this.tasksService.addTask(this.form.value);
+      }
       this.form.reset();
       this.task = null;
     }

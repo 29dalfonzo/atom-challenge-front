@@ -11,7 +11,7 @@
     <!-- <p>No hay tareas</p> -->
     <div class="task-card task-card-list">
   <div class="tasks-list">
-    <mat-list class="tasks-container" *ngFor="let task of tasks">
+    <mat-list class="tasks-container" *ngFor="let task of tasksService.tasks$ | async">
       <span matListItemTitle class="task-title">{{ task.title }}</span>
       <div class="task-options">
         <button mat-icon-button (click)="editTask(task)">
@@ -27,7 +27,7 @@
         <mat-checkbox [checked]="task.done" (change)="changeTask(task)" >{{task.done? 'Completado': 'Pendiente'}}</mat-checkbox>
     </div>
       <span matListItemMeta class="task-date">{{ task.date | date: 'dd/MM/yyyy' }}</span>
-          </mat-list>
+    </mat-list>
   </div>
 </div>
     <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
