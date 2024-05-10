@@ -11,7 +11,7 @@ export class AuthService {
   private headers = { 'Content-Type': 'application/json' };
   constructor(private http: HttpClient,) { }
 
-  login(email: string) {
+  login(email: string): Observable<any> {
     return this.http.get(`${this.apiUrl}/${email}`, { headers: this.headers });
   }
 
@@ -23,5 +23,10 @@ export class AuthService {
         headers: this.headers,
       }
     );
+  }
+
+  validateLogin(): boolean {
+    const token = localStorage.getItem('token');
+    return !!token;
   }
 }

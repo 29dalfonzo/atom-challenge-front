@@ -45,6 +45,7 @@ export class LoginComponent {
       next: (response) => {
         console.log('response', response);
         this.loading = false;
+        localStorage.setItem('token', JSON.stringify(response));
         this.router.navigate(['/tasks']);
       },
       error: (error) => {
