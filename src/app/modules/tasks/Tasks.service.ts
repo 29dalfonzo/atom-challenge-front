@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'enviroment';
 import { BehaviorSubject } from 'rxjs';
@@ -11,20 +12,14 @@ export class TaskService {
   tasks$ = this.tasksSource.asObservable();
   private apiUrl = environment.apiUrl;
 
-  constructor() { }
+  constructor(
+    private http: HttpClient
+  ) { }
 
   loadTasks() {
-    // Simula la carga de tareas, por ejemplo, desde una API
-    const tasks: Task[] = [
-      {
-        id: 1, title: 'Task 1', description: 'Description 1', done: false, date: new Date()
-      },
-      {
-        id: 2, title: 'Task 2', description: 'Description 2', done: false, date: new Date()
-      },
-      // más tareas...
-    ];
-    this.tasksSource.next(tasks);
+    this.http.get<Task[]>(`${this.apiUrl}/tasks`).subscribe((tasks) => {
+      this.tasksSource.next(tasks);
+    });
   }
 
   addTask(task: Task) {

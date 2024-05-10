@@ -1,5 +1,6 @@
 /* eslint-disable class-methods-use-this */
 import { CommonModule, NgOptimizedImage } from "@angular/common";
+import { HttpClientModule } from "@angular/common/http";
 import { Component } from '@angular/core';
 import {
   FormControl, FormGroup, ReactiveFormsModule, Validators
@@ -12,6 +13,7 @@ import { MatInputModule } from "@angular/material/input";
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { Router } from "@angular/router";
 
+import { AuthService } from "./auth.service";
 import { RegisterComponent } from "./register/register.component";
 
 @Component({
@@ -19,7 +21,8 @@ import { RegisterComponent } from "./register/register.component";
   templateUrl: './login.component.html',
   standalone: true,
   // eslint-disable-next-line max-len
-  imports: [CommonModule, MatButtonModule, NgOptimizedImage, MatCardModule, MatFormFieldModule, ReactiveFormsModule, MatInputModule, MatProgressBarModule, MatDialogModule],
+  imports: [CommonModule, MatButtonModule, NgOptimizedImage, MatCardModule, MatFormFieldModule, ReactiveFormsModule, MatInputModule, MatProgressBarModule, MatDialogModule, HttpClientModule],
+  providers: [AuthService],
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
@@ -30,24 +33,28 @@ export class LoginComponent {
   loading = false;
   constructor(
     private router: Router,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private authService: AuthService
   ) { }
 
   submit(): void {
     console.log(this.form.value);
     this.loading = true;
-    if (this.form.value.email === this.testEmail) {
-      console.log('Email is correct');
-      localStorage.setItem('email', this.form.value.email);
 
-      setTimeout(() => {
+    this.authService.login(this.form.value.email).subscribe({
+      next: (response) => {
+        console.log('response', response);
+        this.loading = false;
         this.router.navigate(['/tasks']);
-      }, 2000);
-    } else {
-      console.log('Email is incorrect');
-      this.openRegisterModal();
-    }
-    this.loading = false;
+      },
+      error: (error) => {
+        console.error('error', error);
+        this.loading = false;
+        if (error.status === 404) {
+          this.openRegisterModal();
+        }
+      }
+    });
   }
 
   openRegisterModal(): void {
