@@ -31,7 +31,7 @@ import { TaskService } from '../Tasks.service';
 })
 export class TaskFormComponent implements OnChanges {
   @Input() task: Task | null = null;
-  @Output() submitEvent: EventEmitter<Task> = new EventEmitter<Task>();
+  @Output() submitEvent: EventEmitter<TaskAction> = new EventEmitter<TaskAction>();
   form: FormGroup = new FormGroup({
     id: new FormControl(null),
     title: new FormControl('', [Validators.required]),
@@ -40,7 +40,11 @@ export class TaskFormComponent implements OnChanges {
     date: new FormControl(new Date())
   });
 
-  constructor(private tasksService: TaskService) { }
+  constructor(private tasksService: TaskService) {
+    this.tasksService.tasks$.subscribe((tasks) => {
+      console.log('tasks3', tasks);
+    });
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['task'].currentValue && this.task) {
@@ -51,12 +55,22 @@ export class TaskFormComponent implements OnChanges {
   submit(): void {
     if (this.form.valid) {
       if (this.task) {
-        this.tasksService.updateTask(this.form.value);
+        this.submitEvent.emit({
+          action: 'update',
+          ...this.form.value
+        });
       } else {
-        this.tasksService.addTask(this.form.value);
+        this.submitEvent.emit({
+          action: 'create',
+          ...this.form.value
+        });
       }
       this.form.reset();
       this.task = null;
     }
   }
+}
+
+export interface TaskAction extends Task {
+  action: 'create' | 'update';
 }

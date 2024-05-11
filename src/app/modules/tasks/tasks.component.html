@@ -11,7 +11,7 @@
     <!-- <p>No hay tareas</p> -->
     <div class="task-card task-card-list">
   <div class="tasks-list">
-    <mat-list class="tasks-container" *ngFor="let task of tasksService.tasks$ | async">
+    <mat-list class="tasks-container" *ngFor="let task of tasks">
       <span matListItemTitle class="task-title">{{ task.title }}</span>
       <div class="task-options">
         <button mat-icon-button (click)="editTask(task)">

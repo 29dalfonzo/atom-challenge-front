@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'enviroment';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, catchError, of } from 'rxjs';
 import { Task } from 'src/app/interfaces/task.interface';
 
 @Injectable({
@@ -13,11 +13,10 @@ export class TaskService {
   private apiUrl = `${environment.apiUrl}tasks`;
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
   ) {
     this.getTasks();
   }
-
   getTasks() {
     this.http.get<Task[]>(`${this.apiUrl}`).subscribe((tasks) => {
       this.tasksSource.next(tasks);
@@ -25,10 +24,17 @@ export class TaskService {
   }
 
   addTask(task: Task) {
-    this.http.post<Task>(`${this.apiUrl}`, task).subscribe((newTask) => {
-      const currentTasks = this.tasksSource.value;
-      this.tasksSource.next([newTask, ...currentTasks,]);
-      console.log('tasks', this.tasksSource.value);
+    this.http.post<Task>(`${this.apiUrl}`, task).pipe(
+      catchError((error) => {
+        console.error('Error adding task:', error);
+        // Asegurarse de devolver un observable que el subscribe pueda manejar
+        return of(null); // Devuelve un observable de un valor nulo si hay error
+      })
+    ).subscribe((newTask) => {
+      if (newTask) { // Solo actualizar si newTask no es nulo
+        const currentTasks = this.tasksSource.value;
+        this.tasksSource.next([...currentTasks, newTask]);
+      }
     });
   }
 
@@ -44,9 +50,8 @@ export class TaskService {
   updateTask(task: Task) {
     this.http.put<Task>(`${this.apiUrl}/${task.id}`, task).subscribe((updatedTask) => {
       const currentTasks = this.tasksSource.value;
-      const index = currentTasks.findIndex((t) => t.id === updatedTask.id);
-      currentTasks[index] = updatedTask;
-      this.tasksSource.next(currentTasks);
+      const updatedTasks = currentTasks.map((t) => (t.id === updatedTask.id ? updatedTask : t));
+      this.tasksSource.next(updatedTasks);
     });
   }
 }

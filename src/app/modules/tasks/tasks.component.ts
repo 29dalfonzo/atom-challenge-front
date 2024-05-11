@@ -17,7 +17,7 @@ import { Router } from '@angular/router';
 import { Task } from 'src/app/interfaces/task.interface';
 
 import { AuthService } from '../login/auth.service';
-import { TaskFormComponent } from "./task-form/task-form.component";
+import { TaskAction, TaskFormComponent } from "./task-form/task-form.component";
 import { TaskService } from './Tasks.service';
 
 @Component({
@@ -45,7 +45,7 @@ export class TasksComponent implements OnInit {
 
   ngOnInit(): void {
     this.validateLogin();
-    // this.getTasks();
+    this.getTasks();
   }
 
   validateLogin(): void {
@@ -55,24 +55,25 @@ export class TasksComponent implements OnInit {
   }
 
   getTasks(): void {
-    this.loading = true;
+    this.tasksService.tasks$.subscribe((tasks) => {
+      console.log('tasks2', tasks);
+      this.tasks = tasks;
+      this.loading = false;
+    });
   }
 
   changeTask(task: Task):void {
-    // TODO: Cambiar el estado de la tarea (done)
-    task.done = !task.done;
+    // TODO: meterle toast
+    this.tasksService.updateTask({ ...task, done: !task.done });
   }
 
-  handleForm(task: Task): void {
+  handleForm(task: TaskAction): void {
     console.log('Task form', task);
-    if (task.id) {
-      // TODO: Edit
-      const index = this.tasks.findIndex((t) => t.id === task.id);
-      this.tasks[index] = task;
+    const { action, ...taskWithoutAction } = task;
+    if (action === 'create') {
+      this.tasksService.addTask(taskWithoutAction);
     } else {
-      // TODO: Create
-      task.id = this.tasks.length + 1;
-      this.tasks.push(task);
+      this.tasksService.updateTask(taskWithoutAction);
     }
   }
 
