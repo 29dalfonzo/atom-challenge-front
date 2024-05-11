@@ -90,6 +90,7 @@ export class TasksComponent implements OnInit {
         break;
       case TaskActionEnum.DELETE:
         this.tasksService.deleteTask(taskWithoutAction);
+        this.task = null;
         break;
       default:
         break;
