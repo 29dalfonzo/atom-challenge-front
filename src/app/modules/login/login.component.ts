@@ -5,13 +5,9 @@ import { Component } from '@angular/core';
 import {
   FormControl, FormGroup, ReactiveFormsModule, Validators
 } from '@angular/forms';
-import { MatButtonModule } from "@angular/material/button";
-import { MatCardModule } from "@angular/material/card";
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { MatFormFieldModule } from "@angular/material/form-field";
-import { MatInputModule } from "@angular/material/input";
-import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatDialog } from "@angular/material/dialog";
 import { Router } from "@angular/router";
+import { MaterialModule } from "src/app/material.module";
 
 import { AuthService } from "./auth.service";
 import { RegisterComponent } from "./register/register.component";
@@ -21,7 +17,7 @@ import { RegisterComponent } from "./register/register.component";
   templateUrl: './login.component.html',
   standalone: true,
   // eslint-disable-next-line max-len
-  imports: [CommonModule, MatButtonModule, NgOptimizedImage, MatCardModule, MatFormFieldModule, ReactiveFormsModule, MatInputModule, MatProgressBarModule, MatDialogModule, HttpClientModule],
+  imports: [CommonModule, NgOptimizedImage, ReactiveFormsModule, HttpClientModule, MaterialModule,],
   providers: [AuthService],
   styleUrls: ['./login.component.scss'],
 })

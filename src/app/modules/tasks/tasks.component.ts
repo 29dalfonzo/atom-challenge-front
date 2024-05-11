@@ -2,20 +2,10 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule } from "@angular/material/button";
-import { MatCardModule } from "@angular/material/card";
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatFormFieldModule } from "@angular/material/form-field";
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from "@angular/material/input";
-import { MatListModule } from '@angular/material/list';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { MatTooltipModule } from '@angular/material/tooltip';
 import { Router } from '@angular/router';
 import { Task } from 'src/app/interfaces/task.interface';
 import { TaskAction, TaskActionEnum } from 'src/app/interfaces/taskAction.interface';
+import { MaterialModule } from 'src/app/material.module';
 
 import { AuthService } from '../login/auth.service';
 import { TaskFormComponent } from "./task-form/task-form.component";
@@ -28,10 +18,7 @@ import { TaskService } from './Tasks.service';
   styleUrls: ['./tasks.component.scss'],
   standalone: true,
   providers: [AuthService, TaskService],
-  imports: [CommonModule, MatButtonModule, MatCardModule,
-    MatFormFieldModule, MatInputModule,
-    MatProgressBarModule, MatDividerModule, MatListModule, ReactiveFormsModule, MatCheckboxModule,
-    MatTooltipModule, MatIconModule, TaskFormComponent, HttpClientModule, TaskItemComponent],
+  imports: [CommonModule, TaskFormComponent, HttpClientModule, TaskItemComponent, MaterialModule],
 })
 export class TasksComponent implements OnInit {
   task: Task | null = null;

@@ -5,18 +5,9 @@ import {
 import {
   FormControl, FormGroup, ReactiveFormsModule, Validators
 } from '@angular/forms';
-import { MatButtonModule } from "@angular/material/button";
-import { MatCardModule } from "@angular/material/card";
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatFormFieldModule } from "@angular/material/form-field";
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from "@angular/material/input";
-import { MatListModule } from '@angular/material/list';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { MatTooltipModule } from '@angular/material/tooltip';
 import { Task } from 'src/app/interfaces/task.interface';
 import { TaskAction, TaskActionEnum } from 'src/app/interfaces/taskAction.interface';
+import { MaterialModule } from 'src/app/material.module';
 
 import { TaskService } from '../Tasks.service';
 
@@ -24,9 +15,7 @@ import { TaskService } from '../Tasks.service';
   selector: 'app-task-form',
   standalone: true,
   providers: [TaskService],
-  imports: [CommonModule, MatButtonModule, MatCardModule, MatFormFieldModule,
-    MatInputModule, MatProgressBarModule, MatDividerModule,
-    MatListModule, ReactiveFormsModule, MatCheckboxModule, MatTooltipModule, MatIconModule],
+  imports: [CommonModule, MaterialModule, ReactiveFormsModule],
   templateUrl: './task-form.component.html',
   styleUrls: ['./task-form.component.scss']
 })

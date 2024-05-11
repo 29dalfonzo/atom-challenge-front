@@ -1,11 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Inject } from '@angular/core';
-import { MatButtonModule } from "@angular/material/button";
-import { MatCardModule } from "@angular/material/card";
-import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { MatFormFieldModule } from "@angular/material/form-field";
-import { MatInputModule } from "@angular/material/input";
-import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MaterialModule } from 'src/app/material.module';
 import { SnackBarService } from 'src/app/sharedServices/snackBar.service';
 
 import { AuthService } from '../auth.service';
@@ -14,7 +10,7 @@ import { AuthService } from '../auth.service';
   selector: 'app-register',
   standalone: true,
   imports: [CommonModule,
-    MatDialogModule, MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule, MatProgressBarModule],
+    MaterialModule,],
   providers: [AuthService, SnackBarService],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
