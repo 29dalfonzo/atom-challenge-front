@@ -15,8 +15,8 @@
 </mat-card-content>
 <div class="task-card task-card-list">
   <div class="tasks-list">
-    <mat-list class="tasks-container" *ngFor="let task of tasks">
-      <span matListItemTitle class="task-title">{{ task.title }}</span>
+    <mat-list [ngClass]="{'task-completed-style': task.done}" class="tasks-container" *ngFor="let task of tasks">
+      <span matListItemTitle class="task-title" [ngClass]="{'task-completed-style': task.done}">{{ task.title }}</span>
       <div class="task-options">
         <button mat-icon-button (click)="editTask(task)">
           <mat-icon>edit</mat-icon>
@@ -30,6 +30,7 @@
         class="task-description"
         [matTooltip]="task.description"
         matTooltipPosition="left"
+        [ngClass]="{'task-completed-style': task.done}"
         >{{
           task.description.length > 50
             ? task.description.substring(0, 40) + "..."

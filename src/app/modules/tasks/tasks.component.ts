@@ -15,9 +15,10 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { Router } from '@angular/router';
 import { Task } from 'src/app/interfaces/task.interface';
+import { TaskAction } from 'src/app/interfaces/taskAction.interface';
 
 import { AuthService } from '../login/auth.service';
-import { TaskAction, TaskFormComponent } from "./task-form/task-form.component";
+import { TaskFormComponent } from "./task-form/task-form.component";
 import { TaskService } from './Tasks.service';
 
 @Component({

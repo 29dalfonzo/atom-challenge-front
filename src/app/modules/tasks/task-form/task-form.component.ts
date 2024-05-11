@@ -16,6 +16,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { Task } from 'src/app/interfaces/task.interface';
+import { TaskAction } from 'src/app/interfaces/taskAction.interface';
 
 import { TaskService } from '../Tasks.service';
 
@@ -69,8 +70,4 @@ export class TaskFormComponent implements OnChanges {
       this.task = null;
     }
   }
-}
-
-export interface TaskAction extends Task {
-  action: 'create' | 'update';
 }
