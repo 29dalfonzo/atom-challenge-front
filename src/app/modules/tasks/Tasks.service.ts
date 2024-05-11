@@ -21,6 +21,7 @@ export class TaskService {
   }
   getTasks() {
     this.http.get<Task[]>(`${this.apiUrl}`).subscribe((tasks) => {
+      tasks.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
       this.tasksSource.next(tasks);
     });
   }

@@ -88,4 +88,7 @@ export class TasksComponent implements OnInit {
   deleteTask(task: Task): void {
     this.tasksService.deleteTask(task);
   }
+  logout(): void {
+    this.router.navigate(['/login']);
+  }
 }

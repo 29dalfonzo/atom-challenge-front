@@ -1,4 +1,8 @@
+
 <mat-card class="tasks-card">
+<button mat-icon-button (click)="logout()" style="position: absolute; top: 10px; right: 10px;">
+  <mat-icon>exit_to_app</mat-icon>
+</button>
   <mat-card-title> Agregar Tarea </mat-card-title>
   <app-task-form
     [task]="task"
