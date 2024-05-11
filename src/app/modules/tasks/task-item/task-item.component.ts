@@ -38,20 +38,15 @@ export class TaskItemComponent {
   @Input() task!: Task;
   @Output() taskAction = new EventEmitter<TaskAction>();
 
-  constructor() {}
-
   changeTask(): void {
-    console.log('changeTask', this.task);
     this.taskAction.emit({ action: TaskActionEnum.UPDATE, ...this.task, done: !this.task.done });
   }
 
   deleteTask(): void {
-    console.log('deleteTask', this.task);
     this.taskAction.emit({ action: TaskActionEnum.DELETE, ...this.task });
   }
 
   editTask(): void {
-    console.log('editTask', this.task);
     this.taskAction.emit({ action: TaskActionEnum.EDIT, ...this.task });
   }
 }

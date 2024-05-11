@@ -31,3 +31,12 @@ $font-weight-bold: bold;
   margin-top: 20px;
 }
 
+mat-card-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+  font-weight: bold;
+}
+
+
