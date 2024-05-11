@@ -17,39 +17,39 @@
 <mat-card-content *ngIf="tasks.length === 0">
   <p>No hay tareas</p>
 </mat-card-content>
-<div class="task-card task-card-list">
-  <div class="tasks-list">
-    <mat-list [ngClass]="{'task-completed-style': task.done}" class="tasks-container" *ngFor="let task of tasks">
-      <span matListItemTitle class="task-title" [ngClass]="{'task-completed-style': task.done}">{{ task.title }}</span>
-      <div class="task-options">
-        <button mat-icon-button (click)="editTask(task)">
-          <mat-icon>edit</mat-icon>
-        </button>
-        <button mat-icon-button (click)="deleteTask(task)">
-          <mat-icon>delete</mat-icon>
-        </button>
-      </div>
-      <span
-        matListItemLine
-        class="task-description"
-        [matTooltip]="task.description"
-        matTooltipPosition="left"
-        [ngClass]="{'task-completed-style': task.done}"
-        >{{
-          task.description.length > 50
-            ? task.description.substring(0, 40) + "..."
-            : task.description
-        }}</span
-      >
-      <div class="task-completed">
-        <mat-checkbox [checked]="task.done" (change)="changeTask(task)">{{
-          task.done ? "Completado" : "Pendiente"
-        }}</mat-checkbox>
-      </div>
-      <span matListItemMeta class="task-date">{{
-        task.date | date : "dd/MM/yyyy"
-      }}</span>
-    </mat-list>
+    <div class="task-card task-card-list" class="tasks-container" *ngFor="let task of tasksService.tasks$ | async">
+      <mat-card [ngClass]="{'task-completed-style': task.done}" >
+        <mat-card-header>
+          <div style="display: flex; justify-content: space-between; width: 100%;">
+            <div>
+              <mat-card-title class="task-title" [ngClass]="{'task-completed-style': task.done}">
+                {{ task.title }}
+              </mat-card-title>
+              <mat-card-subtitle class="task-date">
+                {{ task.date | date : "dd/MM/yyyy" }}
+              </mat-card-subtitle>
+
+              <mat-checkbox [checked]="task.done" (change)="changeTask(task)">
+                {{ task.done ? "Completado" : "Pendiente" }}
+              </mat-checkbox>
+            </div>
+            <mat-card-actions class="task-options">
+              <button mat-icon-button (click)="editTask(task)">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button (click)="deleteTask(task)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </mat-card-actions>
+          </div>
+        </mat-card-header>
+        <mat-card-content>
+          <p  [matTooltip]="task.description" [ngClass]="{'task-completed-style': task.done}">
+            {{
+                 task.description
+            }}
+          </p>
+        </mat-card-content>
+      </mat-card>
   </div>
-</div>
 <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>

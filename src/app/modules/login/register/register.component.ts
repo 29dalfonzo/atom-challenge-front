@@ -6,6 +6,7 @@ import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/materia
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { SnackBarService } from 'src/app/sharedServices/snackBar.service';
 
 import { AuthService } from '../auth.service';
 
@@ -14,7 +15,7 @@ import { AuthService } from '../auth.service';
   standalone: true,
   imports: [CommonModule,
     MatDialogModule, MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule, MatProgressBarModule],
-  providers: [AuthService],
+  providers: [AuthService, SnackBarService],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
@@ -25,25 +26,23 @@ export class RegisterComponent {
   constructor(
     public dialogRef: MatDialogRef<RegisterComponent>,
     @Inject(MAT_DIALOG_DATA) public data: RegisterData,
-    private authService: AuthService
+    private authService: AuthService,
+    private snackBarService: SnackBarService
   ) {
   }
 
   cancel(): void {
-    console.log('Register modal closed');
     this.dialogRef.close();
   }
 
   createUser(): void {
-    console.log('User created');
     this.authService.register(this.data.email).subscribe({
-      next: (response) => {
-        console.log('Respuesta recibida:', response);
+      next: () => {
         this.dialogRef.close({ email: this.data.email });
+        this.snackBarService.openSnackBar('Usuario registrado correctamente', 'Cerrar');
       },
-      error: (error) => {
-        console.error('Error al crear el usuario:', error);
-        console.log('Detalles del error:', error.status, error.statusText, error.url, error.ok);
+      error: () => {
+        this.snackBarService.openSnackBar('Error al registrar el usuario', 'Cerrar');
       }
     });
   }

@@ -1,5 +1,5 @@
-
-.container {  display: grid;
+.container {
+  display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
   gap: 0px 0px;
@@ -7,15 +7,20 @@
   grid-template-areas:
     "title done"
     "description description";
-}
 
-.title { grid-area: title; }
+  .title {
+    grid-area: title;
+  }
 
-.done { grid-area: done; }
+  .done {
+    grid-area: done;
+  }
 
-.description {
-  grid-area: description;
-  mat-form-field{
-    width: 100%;
+  .description {
+    grid-area: description;
+
+    mat-form-field {
+      width: 100%;
+    }
   }
 }

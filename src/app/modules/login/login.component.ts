@@ -38,18 +38,15 @@ export class LoginComponent {
   ) { }
 
   submit(): void {
-    console.log(this.form.value);
     this.loading = true;
 
     this.authService.login(this.form.value.email).subscribe({
       next: (response) => {
-        console.log('response', response);
         this.loading = false;
         localStorage.setItem('token', JSON.stringify(response));
         this.router.navigate(['/tasks']);
       },
       error: (error) => {
-        console.error('error', error);
         this.loading = false;
         if (error.status === 404) {
           this.openRegisterModal();
@@ -59,15 +56,13 @@ export class LoginComponent {
   }
 
   openRegisterModal(): void {
-    console.log('Register modal opened');
     const dialogRef = this.dialog.open(RegisterComponent, {
       width: '280px',
       height: '320px',
       data: { email: this.form.value.email },
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed', result);
+    dialogRef.afterClosed().subscribe(() => {
       setTimeout(() => {
         this.router.navigate(['/tasks']);
       }, 2000);

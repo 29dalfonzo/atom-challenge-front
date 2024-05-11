@@ -1,107 +1,45 @@
-mat-card-title,
-mat-card-content {
-  display: flex;
-  justify-content: center;
-}
-
-mat-card-title {
-  margin: 10px 0;
-}
-
-.tasks-card {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  // height: 80%;
-  // width: 80%;
-}
-
-.task-form {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-}
-
-textarea {
-  width: 100%;
-  resize: none;
-}
-
+$shadow-color: rgba(0, 0, 0, 0.25);
+$font-size-small: 10px;
+$font-size-large: 20px;
+$font-weight-bold: bold;
 
 mat-card {
-  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.25);
+  box-shadow: 0px 0px 10px 0px $shadow-color;
+
+  &-title,
+  &-content {
+    display: flex;
+    justify-content: center;
+  }
+
+  &-title {
+    margin: 10px 0;
+  }
 }
-
-mat-list-item {
-  height: 120px !important;
-}
-
-
-.tasks-card-list{
-  padding-bottom: 20px;
-  // max-height: 500px;
-  overflow-y: auto;
-}
-
 
 
 .tasks-container {
   width: 100%;
-  max-width: 500px;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 0.15fr;
-  gap: 0px 0px;
-  grid-auto-flow: row;
-  grid-template-areas:
-    "task-title . task-options"
-    "task-description task-description task-completed"
-    ". task-date .";
-  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.25);
-  margin: 10px;
-  padding: 10px;
-}
-
-.task-title { grid-area: task-title; }
-
-.task-options {
-  grid-area: task-options;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.task-description { grid-area: task-description; }
-
-.task-completed {
-  grid-area: task-completed;
-}
-
-.task-date {
-  grid-area: task-date;
-  font-size: 10px;
-  display: flex;
-  justify-content: center;
-}
-
-.tasks-list{
-  display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  margin-bottom: 20px;
+
+
+  .task-date {
+    font-size: $font-size-small;
+    display: flex;
+    justify-content: center;
+  }
 }
 
-
-.title{
-  font-size: 20px;
-  font-weight: bold;
+.title {
+  font-size: $font-size-large;
+  font-weight: $font-weight-bold;
   text-align: center;
 }
 
-
-.task-completed-style{
+.task-completed-style {
   text-decoration: line-through;
   opacity: 0.65;
 }
-

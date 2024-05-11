@@ -46,7 +46,6 @@ export class TasksComponent implements OnInit {
 
   ngOnInit(): void {
     this.validateLogin();
-    this.getTasks();
   }
 
   validateLogin(): void {
@@ -55,21 +54,12 @@ export class TasksComponent implements OnInit {
     }
   }
 
-  getTasks(): void {
-    this.tasksService.tasks$.subscribe((tasks) => {
-      console.log('tasks2', tasks);
-      this.tasks = tasks;
-      this.loading = false;
-    });
-  }
-
   changeTask(task: Task):void {
     // TODO: meterle toast
     this.tasksService.updateTask({ ...task, done: !task.done });
   }
 
   handleForm(task: TaskAction): void {
-    console.log('Task form', task);
     const { action, ...taskWithoutAction } = task;
     switch (action) {
       case 'create':

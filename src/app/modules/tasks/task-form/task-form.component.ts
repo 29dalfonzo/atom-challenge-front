@@ -41,12 +41,6 @@ export class TaskFormComponent implements OnChanges {
     date: new FormControl(new Date())
   });
 
-  constructor(private tasksService: TaskService) {
-    this.tasksService.tasks$.subscribe((tasks) => {
-      console.log('tasks3', tasks);
-    });
-  }
-
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['task'].currentValue && this.task) {
       this.form.patchValue(this.task);
