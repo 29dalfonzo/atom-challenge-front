@@ -1,33 +1,50 @@
 <mat-card class="tasks-card">
-  <mat-card-title > Agregar Tarea </mat-card-title>
-      <app-task-form [task]="task" (submitEvent)="handleForm($event)"></app-task-form>
+  <mat-card-title> Agregar Tarea </mat-card-title>
+  <app-task-form
+    [task]="task"
+    (submitEvent)="handleForm($event)"
+  ></app-task-form>
   <mat-card-footer>
     <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
   </mat-card-footer>
 </mat-card>
 
-  <h3 class="title"> Tareas </h3>
-  <!-- <mat-carddicontent *ngIf="tasks.length === 0"> -->
-    <!-- <p>No hay tareas</p> -->
-    <div class="task-card task-card-list">
+<h3 class="title">Tareas</h3>
+<mat-card-content *ngIf="tasks.length === 0">
+  <p>No hay tareas</p>
+</mat-card-content>
+<div class="task-card task-card-list">
   <div class="tasks-list">
     <mat-list class="tasks-container" *ngFor="let task of tasks">
       <span matListItemTitle class="task-title">{{ task.title }}</span>
       <div class="task-options">
         <button mat-icon-button (click)="editTask(task)">
-          <mat-icon >edit</mat-icon>
+          <mat-icon>edit</mat-icon>
         </button>
         <button mat-icon-button (click)="deleteTask(task)">
-          <mat-icon >delete</mat-icon>
+          <mat-icon>delete</mat-icon>
         </button>
-
       </div>
-      <span matListItemLine class="task-description" [matTooltip]="task.description" matTooltipPosition="left">{{ task.description.length > 50 ? task.description.substring(0, 40) + '...' : task.description }}</span>
+      <span
+        matListItemLine
+        class="task-description"
+        [matTooltip]="task.description"
+        matTooltipPosition="left"
+        >{{
+          task.description.length > 50
+            ? task.description.substring(0, 40) + "..."
+            : task.description
+        }}</span
+      >
       <div class="task-completed">
-        <mat-checkbox [checked]="task.done" (change)="changeTask(task)" >{{task.done? 'Completado': 'Pendiente'}}</mat-checkbox>
-    </div>
-      <span matListItemMeta class="task-date">{{ task.date | date: 'dd/MM/yyyy' }}</span>
+        <mat-checkbox [checked]="task.done" (change)="changeTask(task)">{{
+          task.done ? "Completado" : "Pendiente"
+        }}</mat-checkbox>
+      </div>
+      <span matListItemMeta class="task-date">{{
+        task.date | date : "dd/MM/yyyy"
+      }}</span>
     </mat-list>
   </div>
 </div>
-    <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+<mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>

@@ -3,9 +3,10 @@ import { Injectable } from '@angular/core';
 import { environment } from 'enviroment';
 import { BehaviorSubject, catchError, of } from 'rxjs';
 import { Task } from 'src/app/interfaces/task.interface';
+import { SnackBarService } from 'src/app/sharedServices/snackBar.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TaskService {
   private tasksSource = new BehaviorSubject<Task[]>([]);
@@ -14,6 +15,7 @@ export class TaskService {
 
   constructor(
     private http: HttpClient,
+    private snackBarService: SnackBarService,
   ) {
     this.getTasks();
   }
@@ -27,13 +29,14 @@ export class TaskService {
     this.http.post<Task>(`${this.apiUrl}`, task).pipe(
       catchError((error) => {
         console.error('Error adding task:', error);
-        // Asegurarse de devolver un observable que el subscribe pueda manejar
-        return of(null); // Devuelve un observable de un valor nulo si hay error
+        this.snackBarService.openSnackBar('Error al agregar la tarea', 'Cerrar');
+        return of(null);
       })
     ).subscribe((newTask) => {
       if (newTask) { // Solo actualizar si newTask no es nulo
         const currentTasks = this.tasksSource.value;
-        this.tasksSource.next([...currentTasks, newTask]);
+        this.tasksSource.next([newTask, ...currentTasks]);
+        this.snackBarService.openSnackBar('Tarea agregada correctamente', 'Cerrar');
       }
     });
   }
@@ -44,14 +47,25 @@ export class TaskService {
       const index = currentTasks.findIndex((t) => t.id === task.id);
       currentTasks.splice(index, 1);
       this.tasksSource.next(currentTasks);
+      this.snackBarService.openSnackBar('Tarea eliminada correctamente', 'Cerrar');
     });
   }
 
   updateTask(task: Task) {
     this.http.put<Task>(`${this.apiUrl}/${task.id}`, task).subscribe((updatedTask) => {
       const currentTasks = this.tasksSource.value;
-      const updatedTasks = currentTasks.map((t) => (t.id === updatedTask.id ? updatedTask : t));
+      const updatedTasks = currentTasks.map((t: Task) => (t.id === updatedTask.id ? updatedTask : t));
       this.tasksSource.next(updatedTasks);
+      this.snackBarService.openSnackBar('Tarea actualizada correctamente', 'Cerrar');
     });
+  }
+
+  validateTask(task: Task): Task {
+    return {
+      ...task,
+      title: task.title.trim(),
+      description: task.description.trim(),
+      date: task.date ?? new Date(),
+    };
   }
 }

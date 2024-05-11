@@ -70,10 +70,13 @@ export class TasksComponent implements OnInit {
   handleForm(task: TaskAction): void {
     console.log('Task form', task);
     const { action, ...taskWithoutAction } = task;
-    if (action === 'create') {
-      this.tasksService.addTask(taskWithoutAction);
-    } else {
-      this.tasksService.updateTask(taskWithoutAction);
+    switch (action) {
+      case 'create':
+        this.tasksService.addTask(this.tasksService.validateTask(taskWithoutAction));
+        break;
+      default:
+        this.tasksService.updateTask(taskWithoutAction);
+        break;
     }
   }
 
