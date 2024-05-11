@@ -15,10 +15,11 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { Router } from '@angular/router';
 import { Task } from 'src/app/interfaces/task.interface';
-import { TaskAction } from 'src/app/interfaces/taskAction.interface';
+import { TaskAction, TaskActionEnum } from 'src/app/interfaces/taskAction.interface';
 
 import { AuthService } from '../login/auth.service';
 import { TaskFormComponent } from "./task-form/task-form.component";
+import { TaskItemComponent } from './task-item/task-item.component';
 import { TaskService } from './Tasks.service';
 
 @Component({
@@ -30,7 +31,7 @@ import { TaskService } from './Tasks.service';
   imports: [CommonModule, MatButtonModule, MatCardModule,
     MatFormFieldModule, MatInputModule,
     MatProgressBarModule, MatDividerModule, MatListModule, ReactiveFormsModule, MatCheckboxModule,
-    MatTooltipModule, MatIconModule, TaskFormComponent, HttpClientModule],
+    MatTooltipModule, MatIconModule, TaskFormComponent, HttpClientModule, TaskItemComponent],
 })
 export class TasksComponent implements OnInit {
   task: Task | null = null;
@@ -60,15 +61,40 @@ export class TasksComponent implements OnInit {
   }
 
   handleForm(task: TaskAction): void {
+    this.loading = true;
     const { action, ...taskWithoutAction } = task;
     switch (action) {
-      case 'create':
+      case TaskActionEnum.CREATE:
         this.tasksService.addTask(this.tasksService.validateTask(taskWithoutAction));
         break;
-      default:
+      case TaskActionEnum.EDIT:
         this.tasksService.updateTask(taskWithoutAction);
         break;
+      default:
+        break;
     }
+    this.loading = false;
+  }
+  handleTaskAction(taskAction: TaskAction): void {
+    this.loading = true;
+    const { action, ...taskWithoutAction } = taskAction;
+    switch (action) {
+      case TaskActionEnum.CREATE:
+        this.tasksService.addTask(this.tasksService.validateTask(taskWithoutAction));
+        break;
+      case TaskActionEnum.UPDATE:
+        this.tasksService.updateTask(taskWithoutAction);
+        break;
+      case TaskActionEnum.EDIT:
+        this.task = taskWithoutAction;
+        break;
+      case TaskActionEnum.DELETE:
+        this.tasksService.deleteTask(taskWithoutAction);
+        break;
+      default:
+        break;
+    }
+    this.loading = false;
   }
 
   editTask(task: Task): void {

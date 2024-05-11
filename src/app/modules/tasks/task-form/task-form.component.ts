@@ -16,7 +16,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { Task } from 'src/app/interfaces/task.interface';
-import { TaskAction } from 'src/app/interfaces/taskAction.interface';
+import { TaskAction, TaskActionEnum } from 'src/app/interfaces/taskAction.interface';
 
 import { TaskService } from '../Tasks.service';
 
@@ -51,12 +51,12 @@ export class TaskFormComponent implements OnChanges {
     if (this.form.valid) {
       if (this.task) {
         this.submitEvent.emit({
-          action: 'update',
+          action: TaskActionEnum.EDIT,
           ...this.form.value
         });
       } else {
         this.submitEvent.emit({
-          action: 'create',
+          action: TaskActionEnum.CREATE,
           ...this.form.value
         });
       }
