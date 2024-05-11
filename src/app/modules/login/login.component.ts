@@ -62,7 +62,10 @@ export class LoginComponent {
       data: { email: this.form.value.email },
     });
 
-    dialogRef.afterClosed().subscribe(() => {
+    dialogRef.afterClosed().subscribe((response) => {
+      if (!response) {
+        return;
+      }
       setTimeout(() => {
         this.router.navigate(['/tasks']);
       }, 2000);

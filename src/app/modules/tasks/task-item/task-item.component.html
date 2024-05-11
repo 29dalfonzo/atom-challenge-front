@@ -1,27 +1,37 @@
 
       <mat-card [ngClass]="{'task-completed-style': task.done}" >
         <mat-card-header>
-          <div style="display: flex; justify-content: space-between; width: 100%;">
-            <div>
-              <mat-card-title class="task-title" [ngClass]="{'task-completed-style': task.done}">
-                {{ task.title }}
-              </mat-card-title>
+          <div class="task-header-container">
+            <!-- <div> -->
+              <div class="task-header">
+                <mat-card-title class="task-title" [ngClass]="{'task-completed-style': task.done}">
+                  {{ task.title }}
+                </mat-card-title>
+
+                  <mat-checkbox color="primary" [matTooltip]="task.done ? 'Marcar como pendiente' : 'Marcar como completado'" [checked]="task.done" (change)="changeTask()">
+                    {{ task.done ? "" : "Completar" }}
+                  </mat-checkbox>
+              </div>
+              <div class="task-header">
               <mat-card-subtitle class="task-date">
                 {{ task.date | date : "dd/MM/yyyy" }}
+              <p class="task-status">
+                <i>{{ task.done ? "Completado" : "Pendiente" }}</i>
+              </p>
               </mat-card-subtitle>
 
-              <mat-checkbox [checked]="task.done" (change)="changeTask()">
-                {{ task.done ? "Completado" : "Pendiente" }}
-              </mat-checkbox>
-            </div>
             <mat-card-actions class="task-options">
-              <button mat-icon-button (click)="editTask()">
+              <button mat-icon-button [matTooltip]="'Editar tarea'" (click)="editTask()">
                 <mat-icon>edit</mat-icon>
               </button>
-              <button mat-icon-button (click)="deleteTask()">
+              <button mat-icon-button [matTooltip]="'Eliminar tarea'" (click)="deleteTask()">
                 <mat-icon>delete</mat-icon>
               </button>
             </mat-card-actions>
+
+              </div>
+
+            <!-- </div> -->
           </div>
         </mat-card-header>
         <mat-card-content>
