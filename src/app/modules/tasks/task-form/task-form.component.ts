@@ -27,7 +27,8 @@ export class TaskFormComponent implements OnChanges {
     title: new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.required]),
     done: new FormControl(false),
-    date: new FormControl(new Date())
+    date: new FormControl(new Date()),
+    user_id: new FormControl(null)
   });
 
   ngOnChanges(changes: SimpleChanges): void {

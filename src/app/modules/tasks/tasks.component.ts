@@ -43,7 +43,6 @@ export class TasksComponent implements OnInit {
   }
 
   changeTask(task: Task):void {
-    // TODO: meterle toast
     this.tasksService.updateTask({ ...task, done: !task.done });
   }
 
