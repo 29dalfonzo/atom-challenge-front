@@ -1,9 +1,14 @@
 @import "assets/styles/theme";
 
 $primary-color: #ff6600;
+$primary-color-light: #ff660040;
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif; }
+body {
+  margin: 0;
+  font-family: Inter, "Helvetica Neue", sans-serif;
+  background-color: $primary-color-light;
+}
 
 mat-icon {
   color: $primary-color;

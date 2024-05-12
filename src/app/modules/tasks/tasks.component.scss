@@ -3,6 +3,7 @@ $font-size-small: 10px;
 $font-size-large: 20px;
 $font-weight-bold: bold;
 
+$primary-color: #ff6600;
 
 
 .tasks-container {
@@ -40,4 +41,12 @@ mat-card-title {
 }
 
 
+.user {
+  margin: 10px 10px 0 10px;
+  font-weight: 300;
+  font-size: 14px;
+  color: $primary-color;
+  display: flex;
+  justify-content: center;
+}
 

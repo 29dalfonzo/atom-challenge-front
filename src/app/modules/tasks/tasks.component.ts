@@ -22,6 +22,7 @@ import { TaskService } from './Tasks.service';
 })
 export class TasksComponent implements OnInit {
   task: Task | null = null;
+  user: string | null = localStorage.getItem('email');
 
   loading = false;
   tasks:Task[] = [];

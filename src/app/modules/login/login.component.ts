@@ -25,7 +25,6 @@ export class LoginComponent implements OnInit {
   form: FormGroup = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
   });
-  testEmail = 'email@test.com';
   loading = false;
   constructor(
     private router: Router,
@@ -47,6 +46,7 @@ export class LoginComponent implements OnInit {
         const { token } = response;
         this.loading = false;
         this.authService.setToken(token);
+        localStorage.setItem('email', this.form.value.email);
         this.router.navigate(['/tasks']);
       },
       error: (error) => {
@@ -71,6 +71,7 @@ export class LoginComponent implements OnInit {
       }
       const { token } = response;
       this.authService.setToken(token);
+      localStorage.setItem('email', this.form.value.email);
       this.router.navigate(['/tasks']);
     });
   }
