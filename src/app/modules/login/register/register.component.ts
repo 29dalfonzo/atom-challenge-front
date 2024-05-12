@@ -33,8 +33,9 @@ export class RegisterComponent {
 
   createUser(): void {
     this.authService.register(this.data.email).subscribe({
-      next: () => {
-        this.dialogRef.close({ email: this.data.email });
+      next: (response) => {
+        const { token } = response;
+        this.dialogRef.close({ token });
         this.snackBarService.openSnackBar('Usuario registrado correctamente', 'Cerrar');
       },
       error: () => {

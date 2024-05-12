@@ -93,6 +93,6 @@ export class TasksComponent implements OnInit {
     this.tasksService.deleteTask(task);
   }
   logout(): void {
-    this.router.navigate(['/login']);
+    this.authService.logout();
   }
 }

@@ -1,7 +1,7 @@
 /* eslint-disable class-methods-use-this */
 import { CommonModule, NgOptimizedImage } from "@angular/common";
 import { HttpClientModule } from "@angular/common/http";
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormControl, FormGroup, ReactiveFormsModule, Validators
 } from '@angular/forms';
@@ -21,7 +21,7 @@ import { RegisterComponent } from "./register/register.component";
   providers: [AuthService],
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   form: FormGroup = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
   });
@@ -33,13 +33,20 @@ export class LoginComponent {
     private authService: AuthService
   ) { }
 
+  ngOnInit(): void {
+    if (this.authService.validateLogin()) {
+      this.router.navigate(['/tasks']);
+    }
+  }
+
   submit(): void {
     this.loading = true;
 
     this.authService.login(this.form.value.email).subscribe({
       next: (response) => {
+        const { token } = response;
         this.loading = false;
-        localStorage.setItem('token', JSON.stringify(response));
+        this.authService.setToken(token);
         this.router.navigate(['/tasks']);
       },
       error: (error) => {
@@ -62,9 +69,9 @@ export class LoginComponent {
       if (!response) {
         return;
       }
-      setTimeout(() => {
-        this.router.navigate(['/tasks']);
-      }, 2000);
+      const { token } = response;
+      this.authService.setToken(token);
+      this.router.navigate(['/tasks']);
     });
   }
 }
