@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://api.example.com'
+  apiUrl: 'https://atom-challenge-back-29dalfonzo.onrender.com/'
 };
