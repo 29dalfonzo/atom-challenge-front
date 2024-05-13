@@ -1,5 +1,16 @@
 {
   "projects": {
     "default": "atom-challenge-dalfonzo"
-  }
+  },
+  "targets": {
+    "atom-challenge-dalfonzo": {
+      "hosting": {
+        "atom-challenge-dalfonzo": [
+          "atom-challenge-dalfonzo"
+        ]
+      }
+    }
+  },
+  "etags": {},
+  "dataconnectEmulatorConfig": {}
 }
