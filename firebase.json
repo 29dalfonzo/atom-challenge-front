@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "target": "atom-fe-challenge-template-ng-15",
+    "target": "atom-challenge-dalfonzo",
     "public": "dist/",
     "ignore": [
       "firebase.json",
