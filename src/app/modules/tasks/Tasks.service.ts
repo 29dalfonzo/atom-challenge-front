@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from 'enviroment';
+import { environment } from 'environment';
 import { BehaviorSubject, catchError, of } from 'rxjs';
 import { Task } from 'src/app/interfaces/task.interface';
 import { SnackBarService } from 'src/app/sharedServices/snackBar.service';
