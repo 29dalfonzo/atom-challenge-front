@@ -11,12 +11,6 @@
       }
     }
   },
-  "rewrites": [
-    {
-      "source": "**",
-      "destination": "/index.html"
-    }
-  ],
   "etags": {},
   "dataconnectEmulatorConfig": {}
 }
