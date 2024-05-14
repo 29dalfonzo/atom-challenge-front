@@ -42,7 +42,7 @@ Estas instrucciones te permitirán obtener una copia del proyecto en funcionamie
 
 clona el repositorio
 ```bash
-git clone https://github.com/29dalfonzo/atom-fe-challenge-template-ng-15.git
+git clone https://github.com/29dalfonzo/atom-challenge-front.git
 ```
 
 ### Dependencias
@@ -53,7 +53,7 @@ git clone https://github.com/29dalfonzo/atom-fe-challenge-template-ng-15.git
 
 * Descarga o clona este repositorio.
 ```
-cd atom-fe-challenge-template-ng-15
+cd atom-challenge-front
 npm install
 ```
 
