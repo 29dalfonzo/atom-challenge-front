@@ -9,28 +9,90 @@ Siéntete libre de clonar este repositorio y utilizarlo como base para el desarr
 De igual manera puedes documentar dentro de este archivo todo lo que deseas contar sobre tu desarrollo, como por ejemplo, decisiones de diseño, problemas encontrados, etc.
 
 ## Comentarios sobre el desarrollo
-...
+Para el desarrollo de la aplicación se ha utilizado Angular con Angular Material.
+Este consta de dos pantallas, una de login y otra de visualización de datos.
+Se ha creado un servicio para la gestión de los datos de la aplicación, autenticación de usuarios y se ha creado un componente para la visualización de los datos asi como un formulario para agregar/editar tareas.
+
+## Descripcion
+El proyecto es un administrador de tareas, donde el usuario puede agregar, editar y eliminar tareas. Ademas de poder marcar las tareas como completadas.
+
+## Decisiones de diseño
+
+Se ha utilizado Angular Material y un poco de SCSS para el diseño de la aplicación, se ha utilizado un diseño sencillo y minimalista para la aplicación para que sea visualmente atractiva y simple de usar.
+
+La aplicacion se encuentra desplegada en Firebase Hosting, se ha utilizado Github Actions para la integración continua del proyecto.
+
+## Live Demo
+Puedes ver el demo de la aplicación en el siguiente enlace:
+* [Angular ](https://atom-challenge-dalfonzo.web.app/)
+
+## Backend
+Para el desarrollo de la aplicación se ha utilizado un backend en Node.js con Express y MongoDB. Puedes encontrar el repositorio del backend en el siguiente enlace:
+* [Backend](https://github.com/29dalfonzo/atom-challenge-back)
+
+## Primeros Pasos
+
+Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para propósitos de desarrollo y pruebas.
+
+### Prerequisitos
+
+* Node.js
+* npm
+
+
+clona el repositorio
+```bash
+git clone https://github.com/29dalfonzo/atom-fe-challenge-template-ng-15.git
+```
+
+### Dependencias
+
+* Angular CLI
+
+### Installing
+
+* Descarga o clona este repositorio.
+```
+cd atom-fe-challenge-template-ng-15
+npm install
+```
+
+### Executing program
+
+* Ejecuta el servidor de desarrollo con el siguiente comando:
+```
+ng serve
+```
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Ejecuta `ng serve` para un servidor de desarrollo. Navega a `http://localhost:4200/`. La aplicación se volverá a cargar automáticamente si cambias algn archivo de origen.
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Ejecuta `ng build` para construir el proyecto. Los artefactos de construcción se almacenarán en el directorio `dist/`. Usa la bandera `--prod` para una construcción de producción.
 
-## Running unit tests
+## Firebase Hosting
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Se ha utilizado Firebase Hosting para el despliegue de la aplicación, puedes encontrar más información sobre como configurar Firebase Hosting en el siguiente enlace:
+* [Firebase Hosting](https://firebase.google.com/docs/hosting)
 
-## Running end-to-end tests
+## Github actions
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Se ha utilizado Github actions para la integración continua del proyecto, puedes encontrar más información sobre como configurar Github actions en el siguiente enlace:
+* [Github Actions](https://docs.github.com/en/actions)
 
-## Further help
+## Code scaffolding
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Ejecuta `ng generate component component-name` para generar un nuevo componente. También puedes usar `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+
+
+## Authors
+
+Daniel Alfonzo 
+[29dalfonzo](https://29dalfonzo.netlify.app/)
+
+## Version History
+
+* 0.1
+    * Initial Release
